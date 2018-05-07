@@ -73,4 +73,10 @@
   _overlay.bounds = _overlayBounds;
 }
 
+- (void)setBearing:(CLLocationDirection)bearing
+{
+  _bearing = bearing;
+  _overlay.bearing = bearing;
+}
+
 @end
