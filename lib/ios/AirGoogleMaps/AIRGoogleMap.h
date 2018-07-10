@@ -47,6 +47,7 @@
 @property (nonatomic, assign) BOOL pitchEnabled;
 @property (nonatomic, assign) BOOL showsUserLocation;
 @property (nonatomic, assign) BOOL showsMyLocationButton;
+@property (nonatomic, assign) BOOL showsIndoors;
 @property (nonatomic, assign) BOOL showsIndoorLevelPicker;
 @property (nonatomic, assign) NSString *kmlSrc;
 
