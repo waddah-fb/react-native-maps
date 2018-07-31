@@ -18,6 +18,7 @@
 @property (nonatomic, copy) NSArray *boundsRect;
 @property (nonatomic, readonly) GMSCoordinateBounds *overlayBounds;
 @property (nonatomic, assign) CLLocationDirection bearing;
+@property (nonatomic, copy) RCTDirectEventBlock onLoad;
 
 @property (nonatomic, weak) RCTBridge *bridge;
 

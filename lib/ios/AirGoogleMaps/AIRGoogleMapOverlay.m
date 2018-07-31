@@ -55,6 +55,7 @@
                                                                    NSLog(@">>> IMAGE: %@", image);
                                                                    weakSelf.overlayImage = image;
                                                                    weakSelf.overlay.icon = image;
+                                                                   if (self.onLoad) self.onLoad(@{});
                                                                  });
                                                                }];
 

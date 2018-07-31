@@ -197,7 +197,7 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
         coordinate.putDouble("accuracy", location.getAccuracy());
         coordinate.putDouble("speed", location.getSpeed());
         coordinate.putBoolean("isFromMockProvider", location.isFromMockProvider());
-         
+
         event.putMap("coordinate", coordinate);
 
         manager.pushEvent(context, view, "onUserLocationChange", event);

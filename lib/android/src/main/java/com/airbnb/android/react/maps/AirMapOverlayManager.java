@@ -7,10 +7,12 @@ import android.view.WindowManager;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 import java.util.Map;
 
@@ -38,7 +40,7 @@ public class AirMapOverlayManager extends ViewGroupManager<AirMapOverlay> {
 
   @Override
   public AirMapOverlay createViewInstance(ThemedReactContext context) {
-    return new AirMapOverlay(context);
+    return new AirMapOverlay(context, this);
   }
 
   @ReactProp(name = "bounds")
@@ -66,11 +68,16 @@ public class AirMapOverlayManager extends ViewGroupManager<AirMapOverlay> {
     view.setImage(source);
   }
 
+  public void onLoad(AirMapOverlay view, ThemedReactContext context) {
+    context.getJSModule(RCTEventEmitter.class)
+        .receiveEvent(view.getId(), "onLoad", new WritableNativeMap());
+  }
 
   @Override
   @Nullable
   public Map getExportedCustomDirectEventTypeConstants() {
     return MapBuilder.of(
+        "onLoad", MapBuilder.of("registrationName", "onLoad"),
         "onPress", MapBuilder.of("registrationName", "onPress")
     );
   }

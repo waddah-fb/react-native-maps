@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.uimanager.ThemedReactContext;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 
 public class AirMapOverlay extends AirMapFeature implements ImageReadable {
 
+  private final ThemedReactContext context;
+  private final AirMapOverlayManager manager;
   private GroundOverlayOptions groundOverlayOptions;
   private GroundOverlay groundOverlay;
   private LatLngBounds bounds;
@@ -29,8 +32,10 @@ public class AirMapOverlay extends AirMapFeature implements ImageReadable {
   private final ImageReader mImageReader;
   private GoogleMap map;
 
-  public AirMapOverlay(Context context) {
+  public AirMapOverlay(ThemedReactContext context, AirMapOverlayManager manager) {
     super(context);
+    this.context = context;
+    this.manager = manager;
     this.mImageReader = new ImageReader(context, getResources(), this);
   }
 
@@ -115,6 +120,9 @@ public class AirMapOverlay extends AirMapFeature implements ImageReadable {
   @Override
   public void setIconBitmap(Bitmap bitmap) {
     this.iconBitmap = bitmap;
+    if (iconBitmap != null) {
+      this.manager.onLoad(this, context);
+    }
   }
 
   @Override
