@@ -293,6 +293,12 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
       @Override
       public void onCameraMoveStarted(int reason) {
         cameraMoveReason = reason;
+        WritableMap event = new WritableNativeMap();
+        // Boolean to be consistent with iOS implementation
+        event.putBoolean("gesture",
+                         reason != GoogleMap.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION
+                         );
+        manager.pushEvent(context, view, "onCameraWillMove", event);
       }
     });
 

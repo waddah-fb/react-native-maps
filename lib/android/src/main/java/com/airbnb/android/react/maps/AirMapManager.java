@@ -339,9 +339,13 @@ public class AirMapManager extends ViewGroupManager<AirMapView> {
         "onPoiClick", MapBuilder.of("registrationName", "onPoiClick")
     ));
 
+    map.putAll(MapBuilder.of(
+        "onCameraWillMove", MapBuilder.of("registrationName", "onCameraWillMove")
+    ));
+
     return map;
   }
-  
+
   @Nullable
   @Override
   public Map<String, Integer> getCommandsMap() {
