@@ -131,7 +131,9 @@ CGRect unionRect(CGRect a, CGRect b) {
   {
     // Refresh according to docs
     _realMarker.tracksViewChanges = YES;
-    _realMarker.tracksViewChanges = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+      _realMarker.tracksViewChanges = NO;
+    });
   }
 }
 
