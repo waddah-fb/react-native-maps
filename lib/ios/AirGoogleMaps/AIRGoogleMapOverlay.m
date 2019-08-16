@@ -42,24 +42,24 @@
   }
 
   __weak typeof(self) weakSelf = self;
-  _reloadImageCancellationBlock = [_bridge.imageLoader loadImageWithURLRequest:[RCTConvert NSURLRequest:_imageSrc]
-                                                                          size:weakSelf.bounds.size
-                                                                         scale:RCTScreenScale()
-                                                                       clipped:YES
-                                                                    resizeMode:RCTResizeModeCenter
-                                                                 progressBlock:nil
-                                                              partialLoadBlock:nil
-                                                               completionBlock:^(NSError *error, UIImage *image) {
-                                                                 if (error) {
-                                                                   NSLog(@"%@", error);
-                                                                 }
-                                                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                                                   NSLog(@">>> IMAGE: %@", image);
-                                                                   weakSelf.overlayImage = image;
-                                                                   weakSelf.overlay.icon = image;
-                                                                   if (self.onLoad) self.onLoad(@{});
-                                                                 });
-                                                               }];
+  RCTImageLoader *imageLoader = [_bridge moduleForClass:[RCTImageLoader class]];
+  _reloadImageCancellationBlock = [imageLoader loadImageWithURLRequest:[RCTConvert NSURLRequest:_imageSrc]                                                                                   size:weakSelf.bounds.size
+                                                                 scale:RCTScreenScale()
+                                                               clipped:YES
+                                                            resizeMode:RCTResizeModeCenter
+                                                         progressBlock:nil
+                                                      partialLoadBlock:nil
+                                                       completionBlock:^(NSError *error, UIImage *image) {
+                                                         if (error) {
+                                                           NSLog(@"%@", error);
+                                                         }
+                                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                                           NSLog(@">>> IMAGE: %@", image);
+                                                           weakSelf.overlayImage = image;
+                                                           weakSelf.overlay.icon = image;
+                                                           if (self.onLoad) self.onLoad(@{});
+                                                         });
+                                                       }];
 
 }
 
