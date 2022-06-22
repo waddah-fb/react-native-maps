@@ -457,7 +457,6 @@ public class AirMapManager extends ViewGroupManager<AirMapView> {
   @Override
   public void onDropViewInstance(AirMapView view) {
     view.doDestroy();
-    super.onDropViewInstance(view);
   }
 
 }
